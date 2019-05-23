@@ -1,0 +1,26 @@
+@import '../../variables';
+
+.container {
+  font-family: $font-family-base;
+  width: 80%;
+  margin: 0 auto;
+  .header-wrapper {
+    display: flex;
+    justify-content: space-around;
+    background-color: $background;
+    p {
+      color: $gray;
+    }
+  }
+  .product-wrapper {
+    display: flex;
+    justify-content: space-around;
+  }
+  .total-wrapper {
+
+  }
+  .back {
+    display: flex;
+    justify-content: space-between;
+  }
+}
