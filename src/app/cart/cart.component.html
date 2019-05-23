@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="header-wrapper">
+    <p>Name</p>
+    <p>Price</p>
+  </div>
+  <div class="product-wrapper" *ngFor="let product of products">
+    <p>{{ product.name }}</p>
+    <p>{{ product.price }}</p>
+  </div>
+  <div class="total-wrapper">
+    <p>Total price <span>{{ total }}</span></p>
+  </div>
+  <div class="back">
+    <a>
+      <button mat-stroked-button color="accent" (click)="back()">
+        <mat-icon>keyboard_backspace</mat-icon>Back
+      </button>
+    </a>
+    <a>
+      <button mat-stroked-button color="warn" (click)="clearShoppingCart()">
+        <mat-icon>remove_shopping_cart</mat-icon>Clear Cart
+      </button>
+    </a>
+  </div>
+
+</div>

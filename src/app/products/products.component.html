@@ -1,0 +1,28 @@
+<div class="container">
+  <mat-card class="product-card" *ngFor="let product of products">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ product.name | titlecase }}</mat-card-title>
+      <mat-card-subtitle>Product id: {{ product.id }}</mat-card-subtitle>
+      <div class="buy-label" title="{{ product.name | titlecase }} price is {{ product.price }}">
+        <span>{{ product.price }} uah</span>
+      </div>
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+      alt="product-{{ product.id }}">
+    <mat-card-content>
+      <p>{{ product.label }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" (click)="addToCart(product.id)">
+        <mat-icon>shopping_cart</mat-icon>Add to cart</button>
+      <a routerLink="/cart" *ngIf="hasProduct">
+        <button mat-stroked-button color="accent">
+          <mat-icon>arrow_right_alt</mat-icon>Go to Cart</button>
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
