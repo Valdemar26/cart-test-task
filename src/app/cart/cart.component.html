@@ -1,9 +1,13 @@
 <div class="container">
   <div class="header-wrapper">
+    <p></p>
     <p>Name</p>
     <p>Price</p>
   </div>
   <div class="product-wrapper" *ngFor="let product of products">
+    <p>
+      <mat-icon title="delete product" (click)="deleteProduct(product.id)">delete_forever</mat-icon>
+    </p>
     <p>{{ product.name }}</p>
     <p>{{ product.price }}</p>
   </div>
@@ -22,5 +26,4 @@
       </button>
     </a>
   </div>
-
 </div>

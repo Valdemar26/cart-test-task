@@ -37,28 +37,13 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(id) {
-    this.products.find( (x: any) => {
-      const items = JSON.parse(localStorage.getItem('products'));
-      if (items) {
-        const find_index = items.findIndex(item => item.id === id);
-        if (find_index === -1 && x.id === id) {
-          this.productArray.push({
-            id: x.id,
-            label: x.label,
-            name: x.name,
-            price: x.price
-          });
-          localStorage.setItem('products', JSON.stringify(this.productArray));
-          this.toastService.showToast(
-            'success',
-            `Замовлення додано!`,
-            3000);
-          return x;
-        }
-      }
-      if (!items) {
+    const x = this.products.find( y => y.id === id);
+    const items = JSON.parse(localStorage.getItem('products'));
+    if (items) {
+      const find_index = items.findIndex(item => item.id === id);
+      if (find_index === -1 && x.id === id) {
         this.productArray.push({
-          id: x.id,  // id
+          id: x.id,
           label: x.label,
           name: x.name,
           price: x.price
@@ -66,11 +51,25 @@ export class ProductsComponent implements OnInit {
         localStorage.setItem('products', JSON.stringify(this.productArray));
         this.toastService.showToast(
           'success',
-          `Замовлення додано!`,
+          `Product ${x.name} added!`,
           3000);
         return x;
       }
-    });
+    }
+    if (!items) {
+      this.productArray.push({
+        id: x.id,
+        label: x.label,
+        name: x.name,
+        price: x.price
+      });
+      localStorage.setItem('products', JSON.stringify(this.productArray));
+      this.toastService.showToast(
+        'success',
+        `Product ${x.name} added!`,
+        3000);
+      return x;
+    }
     this.checkProduct();
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {Product} from '../interfaces/product';
+import { Product } from '../interfaces/product';
+import { ToastService } from '../shared/modules/toastr.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,10 +10,11 @@ import {Product} from '../interfaces/product';
 })
 export class CartComponent implements OnInit {
   products: Product[] = [];
-  total = 0;
+  total: number;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private toastService: ToastService,
   ) { }
 
   ngOnInit() {
@@ -28,6 +30,10 @@ export class CartComponent implements OnInit {
   }
 
   clearShoppingCart() {
+    this.toastService.showToast(
+      'info',
+      `Product Cart cleared!`,
+      3000);
     localStorage.clear();
     this.navigateToProducts();
   }
@@ -35,11 +41,28 @@ export class CartComponent implements OnInit {
   showProducts() {
     if (localStorage.getItem('products')) {
       this.products = JSON.parse(localStorage.getItem('products'));
-      for(let i = 0; i < this.products.length; i++) {
-        this.total += this.products[i].price;
-      }
-      return this.total;
+      this.getTotal();
     }
+  }
+
+  getTotal() {
+    this.total = 0;
+    for (let i = 0; i < this.products.length; i++) {
+      this.total += this.products[i].price;
+    }
+    return this.total;
+  }
+
+  deleteProduct(id) {
+    this.products = JSON.parse(localStorage.getItem('products'));
+    const removedItem = this.products.findIndex( item => item.id === id);
+    this.products.splice(removedItem, 1);
+    localStorage.setItem('products', JSON.stringify(this.products));
+    this.toastService.showToast(
+      'warning',
+      `Product deleted from Cart!`,
+      3000);
+    this.getTotal();
   }
 
 }

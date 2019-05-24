@@ -1,57 +1,26 @@
-import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 import { ToastService } from './shared/modules/toastr.service';
-import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
 
   toast: Subscription;
-  lastRoute: string;
-  lastPosition = 0;
 
   constructor(
-    public router: Router,
     public toastr: ToastrService,
     private toastService: ToastService
   ) {}
 
   ngOnInit() {
     this.toastInit();
-  }
-
-  // After view init so NativeElement is available.
-  ngAfterViewInit() {
-    this.router.events
-      .pipe(
-        filter(
-          events =>
-            events instanceof NavigationStart || events instanceof NavigationEnd
-        )
-      )
-      .subscribe(events => {
-        if (
-          events instanceof NavigationStart &&
-          events.url !== this.lastRoute
-        ) {
-          this.lastRoute = this.router.url;
-
-          // if using window :
-          this.lastPosition = window.pageYOffset;
-          // Scroll to top because it's a new route.
-          window.scrollTo(0, 0);
-        }
-        if (events instanceof NavigationEnd && events.url === this.lastRoute) {
-          window.scrollTo(0, this.lastPosition);
-        }
-      });
   }
 
   toastInit(): void {
