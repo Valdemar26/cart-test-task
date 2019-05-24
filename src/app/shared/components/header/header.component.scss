@@ -1,0 +1,41 @@
+@import '../../../../variables';
+
+.header {
+  background: $primary;
+  font-family: $font-family-base;
+  margin-bottom: 20px;
+  .main-link {
+    text-decoration: none;
+    &:hover {
+      color: $white;
+    }
+  }
+  .toggle-group {
+    margin-left: 20px;
+    height: 100%;
+    .mat-button-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        background: darken($primary, 5%);
+        color: $white;
+      }
+    }
+    .mat-button-toggle-appearance-standard {
+      background: none;
+      color: $white;
+    }
+    .mat-button-toggle-checked {
+      background: darken($primary, 5%);
+      color: $white;
+      &:hover {
+        /deep/ .mat-button-toggle-focus-overlay {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+
