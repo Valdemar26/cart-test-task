@@ -42,17 +42,19 @@ export class ProductsComponent implements OnInit {
     if (items) {
       const find_index = items.findIndex(item => item.id === id);
       if (find_index === -1 && x.id === id) {
-        this.productArray.push({
+        items.push({
           id: x.id,
           label: x.label,
           name: x.name,
           price: x.price
         });
+        this.productArray = items;
         localStorage.setItem('products', JSON.stringify(this.productArray));
         this.toastService.showToast(
           'success',
           `Product ${x.name} added!`,
           3000);
+        this.hasProduct = true;
         return x;
       }
     }
@@ -68,6 +70,7 @@ export class ProductsComponent implements OnInit {
         'success',
         `Product ${x.name} added!`,
         3000);
+      this.hasProduct = true;
       return x;
     }
     this.checkProduct();
