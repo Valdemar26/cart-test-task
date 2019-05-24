@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatIconModule} from '@angular/material';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     RouterModule,
     HttpClientModule,
     MatToolbarModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatIconModule
   ],
   declarations: [
     HeaderComponent
@@ -30,7 +32,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     FormsModule,
     RouterModule,
     HttpClientModule,
-    HeaderComponent
+    HeaderComponent,
+    MatIconModule
   ],
   entryComponents: []
 })
